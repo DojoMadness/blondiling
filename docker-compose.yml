@@ -1,0 +1,36 @@
+version: "3.4"
+services:
+  postgres:
+    image: postgres:10.6-alpine
+    container_name: influcrawler-postgres
+  redis:
+    image: redis:4.0-alpine
+    container_name: influcrawler-redis
+  app:
+    build:
+      context: .
+    container_name: blondiling-manager
+    image: blondiling:latest
+    command: npm run start:manager
+    environment: &app_env
+      NODE_ENV: development
+      NODE_PORT: 3000
+      DATABASE_URL: postgresql://postgres@postgres:5432/db_dev?pool=5
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - redis
+  worker:
+    container_name: blondiling-worker
+    image: blondiling:latest
+    command: npm run start:worker
+    environment:
+      <<: *app_env
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis

@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-image-demo",
+  "version": "1.0.0",
+  "description": "nodejs image demo",
+  "author": "William Koehler <williamferk@gmail.com>",
+  "main": "manager.js",
+  "keywords": [
+    "nodejs",
+    "bootstrap",
+    "express"
+  ],
+  "dependencies": {
+    "bull": "^3.10.0",
+    "express": "^4.16.4"
+  },
+  "scripts": {
+    "start:manager": "node manager.js",
+    "start:worker": "node worker.js"
+  }
+}
