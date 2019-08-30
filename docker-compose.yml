@@ -24,7 +24,7 @@ services:
       - postgres
       - redis
   worker:
-    container_name: blondiling-worker
+    container_name: blondiling-worker-1
     image: blondiling:latest
     command: npm run start:worker
     environment:
